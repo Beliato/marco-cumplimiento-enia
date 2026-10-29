@@ -1,0 +1,33 @@
+# Análisis de estabilidad de la equidad entre semillas (D61).
+#
+# Se declara ANTES de correrlo, por la misma razón que los umbrales de
+# equidad: una regla de lectura elegida después de ver los resultados podría
+# elegirse para que salieran bien.
+#
+# Lo único que varía entre corridas es la semilla del modelo (`random_state`
+# del bosque aleatorio). Los datos, la partición, los umbrales, los
+# subgrupos, el soporte mínimo y PYTHONHASHSEED quedan como los declara cada
+# configuración. Las corridas no explican inferencias ni escriben bitácora:
+# no son expedientes, son un análisis de sensibilidad sobre ellos. El
+# veredicto de cada expediente sigue siendo el de su semilla sellada.
+
+configuraciones:
+  - config.yaml
+  - config.hogares.yaml
+
+# Diez semillas. Tiene que estar la de cada configuración (42): con ella el
+# análisis reproduce los resultados del expediente, y eso se comprueba.
+semillas: [42, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Cómo se lee cada combinación que decide el veredicto (subgrupo x actividad
+# x métrica), según la proporción de semillas en que incumple su umbral,
+# contada sobre las semillas en que es evaluable:
+#   - incumplimiento estable: incumple en al menos el 80 % (8 de 10);
+#   - cumplimiento estable: incumple en a lo sumo el 20 % (2 de 10);
+#   - inestable: cualquier otro caso. Su resultado depende de la semilla y no
+#     sostiene por sí solo una conclusión sobre el sistema.
+regla:
+  incumple_estable_desde: 0.8
+  cumple_estable_hasta: 0.2
+
+salida: artefactos/estabilidad

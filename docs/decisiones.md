@@ -1209,3 +1209,38 @@ Solo cambia el texto de `datos.fuente`. Como el paso 3 sella el hash del
 archivo de configuración entero, los dos expedientes se regeneraron: cambia
 el hash sellado y no cambia ningún resultado, porque datos, modelo, umbrales
 y subgrupos son los mismos.
+
+## D61 — La estabilidad de la equidad entre semillas se mide, con un plan previo
+Cada expediente sale de un único entrenamiento con la semilla sellada. Una
+disparidad cercana al umbral —0,107 en la TVP de `Watch_TV` entre viviendas,
+contra 0,10— puede ser del sistema o del azar del entrenamiento, y con una
+sola corrida no se distingue. El límite "Reproducibilidad de resultado" lo
+declaraba sin medirlo; el profesor guía pidió medirlo.
+
+`make estabilidad` reentrena el mismo modelo con diez semillas y cuenta, para
+cada combinación que decide (subgrupo × actividad × métrica), en cuántas
+incumple su umbral. Lo único que varía es el `random_state` del bosque: datos,
+partición, umbrales, subgrupos, soporte mínimo y `PYTHONHASHSEED` son los de
+cada configuración, y las métricas salen de `evaluar_equidad`, la misma
+función del paso 4. No usa `entrenar`, que sella el modelo del expediente y
+exige que su semilla sea la global.
+
+**El plan se declara antes de correrlo**, en `estabilidad.yaml`, por la razón
+de D13: una regla de lectura elegida después de ver los resultados podría
+elegirse para que salieran bien.
+
+- Semillas: 42, 1, 2, 3, 4, 5, 6, 7, 8, 9. La 42 es la sellada.
+- Incumplimiento estable si incumple en al menos el 80 % de las semillas en
+  que es evaluable; cumplimiento estable si incumple en a lo sumo el 20 %;
+  inestable en otro caso.
+
+**Dos garantías que el análisis comprueba solo.** Con la semilla sellada
+tiene que reproducir las métricas del expediente: lo verifica una prueba
+sobre datos sintéticos y, en cada corrida real, una comparación con
+`metricas_equidad.json` que hace fallar el comando si no coinciden. Y qué es
+evaluable no cambia entre semillas, porque los denominadores de las tasas
+salen de las etiquetas reales, no de las predicciones.
+
+**Qué no cambia.** No es un expediente ni reemplaza el veredicto sellado:
+escribe en `artefactos/estabilidad/` y no toca los expedientes. Una
+disparidad inestable no se borra del veredicto; se lee con esa advertencia.

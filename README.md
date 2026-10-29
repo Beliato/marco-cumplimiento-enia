@@ -17,7 +17,7 @@ por eso el propio repositorio es ejemplar en eso: versiones fijadas, semillas
 declaradas, ejecución determinista y sin estado oculto.
 
 > **Estado:** el marco está completo y se ejecutó sobre **dos pilotos**, con
-> **272 pruebas** en verde.
+> **292 pruebas** en verde.
 >
 > | Piloto | Configuración | Viviendas | Inferencias | Requerimientos |
 > |---|---|---|---:|---|
@@ -124,6 +124,7 @@ make pipeline             # ejecuta los 6 pasos del marco (usa config.yaml)
 make pipeline CONFIG=config.hogares.yaml   # el piloto multi-hogar
 make demo                 # los 6 pasos sobre 20 días, en menos de un minuto (ver docs/demo.md)
 make verificar-registro   # verifica la bitácora de inferencias
+make estabilidad          # reentrena con 10 semillas y mide qué disparidades son estables (D61)
 make clean                # borra artefactos generados (no toca datos/)
 make help                 # lista todos los comandos
 ```
@@ -225,9 +226,10 @@ SHA-256 de la fila de entrada — no se guardan datos crudos), `salida_modelo`,
 .
 ├── config.yaml              piloto de Aruba: toda la parametrización en un archivo
 ├── config.hogares.yaml      piloto multi-hogar
+├── estabilidad.yaml         plan del análisis de estabilidad entre semillas
 ├── requirements.txt         dependencias directas, versiones exactas
 ├── requirements.lock        cierre transitivo (generado por `make lock`)
-├── Makefile                 setup · lock · test · pipeline · demo · verificar-registro · clean
+├── Makefile                 setup · lock · test · pipeline · demo · estabilidad · verificar-registro · clean
 ├── pyproject.toml           configuración de pytest (sin empaquetar)
 ├── .python-version          3.11
 ├── scripts/                 setup.sh · preparar_demo.py · preparar_hogares.py

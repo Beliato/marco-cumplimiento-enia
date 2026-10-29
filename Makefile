@@ -12,7 +12,7 @@ export PYTHONHASHSEED := 42
 
 .DEFAULT_GOAL := help
 
-.PHONY: help setup lock test pipeline demo clean clean-datos verificar-registro
+.PHONY: help setup lock test pipeline demo estabilidad clean clean-datos verificar-registro
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
@@ -45,6 +45,9 @@ demo: ## Corrida de demostración: los 6 pasos sobre 20 días (cambiar con DIAS=
 	 echo "==> código de salida: $$codigo (2 = hallazgos; 1 = error)"; \
 	 echo "==> artefactos de la demo en artefactos/demo/"; \
 	 [ $$codigo -ne 1 ]
+
+estabilidad: ## Estabilidad de la equidad entre semillas según estabilidad.yaml (no toca los expedientes)
+	$(PY) -m src.equidad.estabilidad --plan estabilidad.yaml
 
 verificar-registro: ## Verifica integridad y completitud de la bitácora de inferencias
 	$(PY) -m src.trazabilidad.verificacion --config $(CONFIG)
