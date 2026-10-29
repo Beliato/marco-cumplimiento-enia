@@ -887,9 +887,9 @@ persona distinta, así que la comparación es entre la población monitoreada.
 **Diagnóstico de `Cook`, la disparidad más ilustrativa.** `hh107` tiene el
 máximo de ejemplos de entrenamiento (943) y la **peor** tasa de aciertos
 (0,292); `hh103` tiene 414 y la mejor (0,795). No es escasez de datos. `hh107`
-es la única vivienda con dos residentes del piloto, y cuando falla predice
-`Wash_Dishes` 83 veces: consistente con dos personas en la cocina haciendo
-cosas distintas. Queda como hipótesis respaldada, no como conclusión: el mismo
+es la única vivienda con dos residentes del piloto (fuente en D60), y cuando
+falla predice `Wash_Dishes` 83 veces: consistente con dos personas en la
+cocina haciendo cosas distintas. Queda como hipótesis respaldada, no como conclusión: el mismo
 `hh107` tiene el **mejor** desempeño en `Sleep` (0,867), así que el patrón
 depende de la actividad.
 
@@ -1187,3 +1187,25 @@ reintroduciendo la numeración vieja en el README.
 **La regla, para la próxima.** Una prueba que comprueba ausencia tiene que
 declarar dónde busca, y ese alcance es parte de lo que hay que revisar: una
 búsqueda incompleta no se distingue de una búsqueda exitosa.
+
+## D60 — La población de cada piloto se cita del depósito oficial
+Dos datos sobre las personas monitoreadas se usaban sin fuente citada, y la
+revisión del artículo los marcó como pendientes. Los dos están en el registro
+oficial de CASAS en Zenodo (DOI 10.5281/zenodo.15708568), que trae una tabla
+con el número de residentes de cada vivienda y una descripción de cada serie.
+
+- **Aruba:** una residente, descrita como "community-dwelling older adult".
+  La documentación original de Aruba la describe como "mujer adulta
+  voluntaria", sin decir que sea adulta mayor; el depósito sí lo dice.
+  `config.yaml` cita ahora las dos fuentes.
+- **Serie `hh`:** `hh101`-`hh106` y `hh108`-`hh120` tienen una persona
+  residente; `hh107` y `hh121`, dos. En el piloto, `hh107` es la única
+  vivienda con dos residentes. Es la fuente que le faltaba al diagnóstico de
+  `Cook` en D52, que sigue siendo una hipótesis respaldada y no una
+  conclusión. `config.hogares.yaml` lo declara en `datos.fuente`, y así llega
+  al datasheet (R4.3).
+
+Solo cambia el texto de `datos.fuente`. Como el paso 3 sella el hash del
+archivo de configuración entero, los dos expedientes se regeneraron: cambia
+el hash sellado y no cambia ningún resultado, porque datos, modelo, umbrales
+y subgrupos son los mismos.

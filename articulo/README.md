@@ -80,7 +80,7 @@ palabra. Se comprobó comparando las palabras del borrador con las de los
    y la afiliación a la Universidad CENFOTEC, donde había marcadores.
 
 Después, las personas autoras quitaron la sección "Declaración sobre el uso
-de inteligencia artificial" (ver pendiente 3).
+de inteligencia artificial" (ver pendiente 1).
 
 ### La alineación con la investigación (PIA02)
 
@@ -116,39 +116,42 @@ de cumplimiento, y la Introducción dice explícitamente que lo evaluado es el
 marco. Se quitó además una mención a la relevancia clínica de Bed\_to\_Toilet:
 la validación clínica está fuera de alcance (1.7.2).
 
+### Las fuentes de la población
+
+Dos marcas de revisión pedían fuente: que la residente de Aruba sea adulta
+mayor y que hh107 tenga dos residentes. Las dos están en la tabla de
+viviendas del depósito oficial de CASAS en Zenodo, que el artículo ya citaba
+(D60). Materiales y métodos y Resultados las citan ahora, y el caso de hh107
+queda como hipótesis, no como causa. La Discusión dice además de qué piloto y
+de qué subgrupo sale el 0,107 de Watch\_TV.
+
 ## Pendientes para decidir
 
 Ordenados por importancia.
 
-1. **Fuente de "hh107 tiene dos residentes".** D52 explica el caso de Cook con
-   ese dato, pero no consta en el expediente ni en el crudo del repositorio.
-   Resultados presenta el caso sin esa explicación hasta tener la fuente.
-2. **Aruba y "adultas mayores".** Materiales y métodos dice que en ambos pilotos
-   la población son personas adultas mayores. La documentación del conjunto
-   describe a la residente de Aruba como "mujer adulta voluntaria".
-3. **Declaración de uso de IA.** Las personas autoras la quitaron por ahora.
+1. **Declaración de uso de IA.** Las personas autoras la quitaron por ahora.
    Antes del envío, revisar si la política de la revista la exige: GitHub
    Copilot armó el borrador inicial, y Claude hizo la conversión a LaTeX, la
    verificación de referencias y la alineación con PIA02.
-4. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
+2. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
    *refinamientos* que el piloto introdujo respecto de PIA02 (métricas que
    deciden, descarte de Fairlearn, piloto multi-hogar, nombres de zona), que
    el objetivo específico 3 pide documentar; y la *contribución dual
    ENIA–AI Act* para el sector healthtech, central en PIA02 y ausente en el
    artículo.
-5. **Título.** Es una propuesta; la traducción al inglés también, y la
+3. **Título.** Es una propuesta; la traducción al inglés también, y la
    plantilla pide evitar traductores automáticos.
-6. **Figura 1.** Es un redibujo. Si se prefiere la original, exportarla desde
+4. **Figura 1.** Es un redibujo. Si se prefiere la original, exportarla desde
    Word como PNG a 300 dpi y reemplazar `contenido/figura-arquitectura.tex`.
-7. **Versión de la ENIA.** La página de créditos dice *Versión 1.0, 24 de
+5. **Versión de la ENIA.** La página de créditos dice *Versión 1.0, 24 de
    octubre de 2024*, con ISBN 978-9968-732-94-9; PIA02 la cita como "Versión
    2.6", que el documento no menciona. El mismo PDF se declara "versión
    simplificada" (p. 3) y remite a la completa en www.micitt.go.cr.
-8. **Autores**: orden, correos, ORCID y si hay una tercera persona.
-9. **Palabras clave**: la plantilla pide términos del tesauro de la UNESCO.
-10. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
+6. **Autores**: orden, correos, ORCID y si hay una tercera persona.
+7. **Palabras clave**: la plantilla pide términos del tesauro de la UNESCO.
+8. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
     consultar para verificar el título oficial en español.
-11. **Páginas de Lundberg y Lee (2017)**: 4765–4774 vienen del borrador y de
+9. **Páginas de Lundberg y Lee (2017)**: 4765–4774 vienen del borrador y de
     PIA02; la página oficial de NeurIPS no las muestra.
 
 ## Correcciones para PIA02
@@ -156,7 +159,7 @@ Ordenados por importancia.
 La revisión encontró en el documento de investigación cosas que no deberían
 pasar al artículo:
 
-- La ENIA como "Versión 2.6": es la 1.0 (ver pendiente 7).
+- La ENIA como "Versión 2.6": es la 1.0 (ver pendiente 5).
 - "La ENIA reconoce textualmente la edad como variable protegida" (1.4, 2.5,
   4.1.2, 5.4 y Tabla 5). El texto dice "respetando las diferencias de edad,
   etnia, género…", en el contexto de la accesibilidad (p. 32). "Variable

@@ -94,9 +94,11 @@ rutas:
 # --- Dataset ----------------------------------------------------------------
 datos:
   fuente: >-
-    CASAS Aruba (WSU CASAS smart home project). Residente única: mujer adulta
-    voluntaria; hijos y nietos la visitan con regularidad. 2010-11-04 a
-    2011-06-11. Citar: D. Cook, "Learning setting-generalized activity models
+    CASAS Aruba (WSU CASAS smart home project). Residente única: una persona
+    adulta mayor que vive en la comunidad, según la tabla de viviendas del
+    depósito oficial de CASAS (DOI 10.5281/zenodo.15708568); la documentación
+    original de Aruba la describe como mujer adulta voluntaria. Hijos y nietos
+    la visitan con regularidad. 2010-11-04 a 2011-06-11. Citar: D. Cook, "Learning setting-generalized activity models
     for smart spaces", IEEE Intelligent Systems, 2011. Licencia y procedencia
     de la copia usada: ver `datos.documentacion.licencia`.
   archivo_crudo: datos/crudos/aruba.txt
