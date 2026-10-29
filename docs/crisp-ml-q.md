@@ -132,10 +132,12 @@ en CRISP-ML(Q) va a preguntarlo.
 **Reproducibilidad de resultado.** El paper distingue entre reproducibilidad
 de *método* —documentar semilla, versiones, hiperparámetros, hardware— y de
 *resultado*: validar la media y estimar la varianza sobre varias semillas, en
-vez de reportar una corrida. El marco cubre la primera y no la segunda: fija
-una semilla y la sella. Medir la varianza exigiría varias corridas del modelo,
-lo que no rompe el protocolo —los umbrales siguen sellados— pero sí obliga a
-decidir qué corrida entra al expediente. Queda pendiente.
+vez de reportar una corrida. El expediente cubre la primera: fija una semilla
+y la sella. La segunda la cubre aparte `make estabilidad` (D61), que
+reentrena el modelo con diez semillas declaradas de antemano y cuenta en
+cuántas incumple cada combinación de equidad. La pregunta de qué corrida
+entra al expediente se responde así: la de la semilla sellada, y el análisis
+dice qué tan estable es su veredicto. Los umbrales siguen sellados.
 
 ## Fases 5 y 6: fuera de alcance, con una salvedad
 

@@ -35,11 +35,18 @@ entre franjas es atribuible al diseño y no a un sesgo emergente. Segundo, la
 exactitud en la configuración multi-hogar fue baja, entre 0,225 y 0,433 por
 vivienda, lo que amplía el margen para observar disparidades. Tercero, el
 procedimiento no midió la robustez del sistema ante entradas ruidosas o
-degradadas. Cuarto, las disparidades provienen de un único entrenamiento con
-semilla fija: sin estimar su variación entre semillas, una diferencia cercana
-al umbral, como la de 0,107 en la TVP de Watch\_TV entre viviendas de la serie
-multi-hogar (0,774 en hh101 frente a 0,667 en hh107), no permite distinguir una
-disparidad del sistema de una variación del entrenamiento.
+degradadas. Cuarto, cada expediente proviene de un único entrenamiento con
+semilla fija. Para estimar cuánto depende el resultado de esa semilla, el
+modelo se reentrenó con diez semillas, con un plan y una regla de lectura
+declarados antes de correrlo: una combinación incumple de forma estable si lo
+hace en al menos ocho de las diez. El veredicto de equidad no aprobó en
+ninguna de las veinte corridas. En Aruba, las cuatro combinaciones que superan
+el umbral lo hicieron con todas las semillas; en la serie multi-hogar, 28 de
+29. La excepción es la diferencia de 0,107 en la TVP de Watch\_TV entre
+viviendas (0,774 en hh101 frente a 0,667 en hh107), que superó el umbral en
+siete de las diez semillas (media 0,105; rango 0,081--0,119): depende del
+entrenamiento y no sostiene por sí sola una conclusión sobre el sistema.
+% Análisis de estabilidad: D61 y `make estabilidad`; plan en estabilidad.yaml.
 
 La trazabilidad fue el componente transversal que permitió unir resultados
 técnicos y responsabilidad. Sin una bitácora persistente, las explicaciones y

@@ -1029,6 +1029,10 @@ insumo que CRISP-ML(Q) propone para detectar deriva y anomalías. El marco no
 monitorea, pero deja instalado lo que hace falta para monitorear.
 
 Detalle completo en `docs/crisp-ml-q.md`.
+
+**Resuelto el segundo hueco (D61).** El expediente conserva la semilla
+sellada, y la variación entre semillas se mide aparte, con un plan declarado
+de antemano. La robustez sigue abierta.
 ## D56 — El alcance frente a la ENIA y los límites del procedimiento son dos cosas
 El reporte de cumplimiento ya declaraba qué principios de la ENIA cubre el
 marco y qué queda fuera dentro de cada uno (D53). Faltaba lo otro: qué
@@ -1209,3 +1213,60 @@ Solo cambia el texto de `datos.fuente`. Como el paso 3 sella el hash del
 archivo de configuración entero, los dos expedientes se regeneraron: cambia
 el hash sellado y no cambia ningún resultado, porque datos, modelo, umbrales
 y subgrupos son los mismos.
+
+## D61 — La estabilidad de la equidad entre semillas se mide, con un plan previo
+Cada expediente sale de un único entrenamiento con la semilla sellada. Una
+disparidad cercana al umbral —0,107 en la TVP de `Watch_TV` entre viviendas,
+contra 0,10— puede ser del sistema o del azar del entrenamiento, y con una
+sola corrida no se distingue. El límite "Reproducibilidad de resultado" lo
+declaraba sin medirlo; el profesor guía pidió medirlo.
+
+`make estabilidad` reentrena el mismo modelo con diez semillas y cuenta, para
+cada combinación que decide (subgrupo × actividad × métrica), en cuántas
+incumple su umbral. Lo único que varía es el `random_state` del bosque: datos,
+partición, umbrales, subgrupos, soporte mínimo y `PYTHONHASHSEED` son los de
+cada configuración, y las métricas salen de `evaluar_equidad`, la misma
+función del paso 4. No usa `entrenar`, que sella el modelo del expediente y
+exige que su semilla sea la global.
+
+**El plan se declara antes de correrlo**, en `estabilidad.yaml`, por la razón
+de D13: una regla de lectura elegida después de ver los resultados podría
+elegirse para que salieran bien.
+
+- Semillas: 42, 1, 2, 3, 4, 5, 6, 7, 8, 9. La 42 es la sellada.
+- Incumplimiento estable si incumple en al menos el 80 % de las semillas en
+  que es evaluable; cumplimiento estable si incumple en a lo sumo el 20 %;
+  inestable en otro caso.
+
+**Dos garantías que el análisis comprueba solo.** Con la semilla sellada
+tiene que reproducir las métricas del expediente: lo verifica una prueba
+sobre datos sintéticos y, en cada corrida real, una comparación con
+`metricas_equidad.json` que hace fallar el comando si no coinciden. Y qué es
+evaluable no cambia entre semillas, porque los denominadores de las tasas
+salen de las etiquetas reales, no de las predicciones.
+
+**Qué no cambia.** No es un expediente ni reemplaza el veredicto sellado:
+escribe en `artefactos/estabilidad/` y no toca los expedientes. Una
+disparidad inestable no se borra del veredicto; se lee con esa advertencia.
+
+**Resultado.** Corrió con el plan del commit `99e954a`, con el árbol limpio.
+En los dos pilotos, la semilla 42 reprodujo las métricas del expediente sin
+una sola diferencia.
+
+- **Aruba:** las 4 combinaciones que incumplen lo hacen en las 10 semillas
+  (Sleeping por franja, entre 0,351 y 0,395). Ninguna es inestable. La
+  exactitud va de 0,697 a 0,707.
+- **Serie `hh`:** 28 de las 29 combinaciones que incumplen lo hacen en las 10
+  semillas, incluidas las mayores entre viviendas: `Work` (0,846–0,872),
+  `Eat` (0,810–0,830) y `Cook` (0,503–0,536). La única inestable es la TVP de
+  `Watch_TV` entre viviendas: incumple en 7 de 10, con media 0,105 y rango
+  0,081–0,119. La exactitud va de 0,323 a 0,329.
+- **El veredicto de equidad no aprueba en las 20 corridas.**
+- Cuatro combinaciones que cumplen con la semilla 42 incumplen en una o dos
+  de las otras, siempre cerca del umbral. Por la regla declarada, su lectura
+  es cumplimiento estable.
+
+**Lectura.** El NO CUMPLE de los dos expedientes no depende de la semilla, y
+la única duda que quedaba —el 0,107 de `Watch_TV`— queda resuelta como lo que
+es: una disparidad que el entrenamiento a veces produce y a veces no. Se
+reporta así, sin borrarla del veredicto sellado.
