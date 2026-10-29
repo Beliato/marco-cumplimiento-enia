@@ -93,7 +93,9 @@ datos:
   fuente: >-
     CASAS smart home dataset, serie `hh` (adultos mayores viviendo de forma
     independiente en una comunidad de retiro). Nueve viviendas, hh101 a hh109,
-    truncadas a sus primeros 30 días. Depósito oficial en Zenodo,
+    truncadas a sus primeros 30 días. Según la tabla de viviendas del
+    depósito, cada una tiene una persona residente, salvo hh107, que tiene
+    dos. Depósito oficial en Zenodo,
     DOI 10.5281/zenodo.15708568, bajo licencia CC BY 4.0. Selección y truncado
     reproducibles con `scripts/preparar_hogares.py`.
   archivo_crudo: datos/crudos/hogares
