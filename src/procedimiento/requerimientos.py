@@ -161,10 +161,11 @@ LIMITES_DEL_PROCEDIMIENTO = (
         "La corrida es reproducible: semilla, versiones de biblioteca y hashes "
         "de datos y parámetros están sellados, y repetirla produce los mismos "
         "números. Lo que el expediente no estima es cuánto se moverían al "
-        "cambiar la semilla. Las disparidades del reporte de equidad "
+        "cambiar la semilla: las disparidades del reporte de equidad "
         "corresponden a una realización del entrenamiento, no a una media con "
-        "su varianza: una diferencia cercana a su umbral debe leerse con esa "
-        "cautela.",
+        "su varianza. Esa variación se mide aparte con `make estabilidad`, que "
+        "reentrena el modelo con varias semillas declaradas de antemano; una "
+        "diferencia cercana a su umbral debe leerse junto con ese análisis.",
     ),
 )
 

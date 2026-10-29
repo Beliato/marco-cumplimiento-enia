@@ -125,6 +125,14 @@ viviendas del depósito oficial de CASAS en Zenodo, que el artículo ya citaba
 queda como hipótesis, no como causa. La Discusión dice además de qué piloto y
 de qué subgrupo sale el 0,107 de Watch\_TV.
 
+### La estabilidad entre semillas
+
+El profesor guía pidió medir cuánto se mueven las disparidades al cambiar la
+semilla. `make estabilidad` reentrenó el modelo con diez semillas, con el plan
+y la regla de lectura comprometidos en git antes de correrlo (D61). El cuarto
+límite de la Discusión pasa de declarar que no se midió a reportar el
+resultado, y las semillas salen del trabajo futuro de las Conclusiones.
+
 ## Pendientes para decidir
 
 Ordenados por importancia.
