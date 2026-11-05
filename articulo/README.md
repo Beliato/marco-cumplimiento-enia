@@ -152,6 +152,13 @@ evitan afirmar que el protocolo "no se puede alterar" o que el instrumento es
 El Word no tiene la Figura 1 de arquitectura, así que allí las figuras de
 resultados son la 1, la 2 y la 3.
 
+La revisión contra PIA01 (1.9, 4.3 y 4.4) ajustó la quinta contribución al alcance
+que declara el documento: "el corpus revisado no permitió identificar", y solo para
+sensores PIR en el contexto costarricense. Se agregaron tres marcos de auditoría y
+evaluación (Raji et al., Z-Inspection y capAI) para ubicar el aporte frente a lo
+publicado: PIA01 no los cubre. Sus descripciones salen de los resúmenes; faltan
+cotejar con los artículos completos, en especial capAI, que es el más cercano.
+
 ## Pendientes para decidir
 
 Ordenados por importancia.
