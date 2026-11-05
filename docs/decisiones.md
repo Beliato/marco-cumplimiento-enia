@@ -1263,10 +1263,38 @@ una sola diferencia.
   0,081–0,119. La exactitud va de 0,323 a 0,329.
 - **El veredicto de equidad no aprueba en las 20 corridas.**
 - Cuatro combinaciones que cumplen con la semilla 42 incumplen en una o dos
-  de las otras, siempre cerca del umbral. Por la regla declarada, su lectura
-  es cumplimiento estable.
+  de las otras; la que más se aleja llega a 0,126. Por la regla declarada, su
+  lectura es cumplimiento estable.
 
 **Lectura.** El NO CUMPLE de los dos expedientes no depende de la semilla, y
 la única duda que quedaba —el 0,107 de `Watch_TV`— queda resuelta como lo que
 es: una disparidad que el entrenamiento a veces produce y a veces no. Se
 reporta así, sin borrarla del veredicto sellado.
+
+**Lo que este análisis no mide.** Solo el azar del entrenamiento. El ruido
+muestral de los grupos con pocos casos queda fuera: estabilidad entre semillas
+no equivale a significancia estadística. Medirlo exigiría otro control, por
+ejemplo subgrupos asignados al azar, y queda como línea futura en el artículo.
+
+## D62 — Las figuras del artículo salen de los expedientes y sí se versionan
+`make figuras` (`scripts/figuras_articulo.py`) dibuja las figuras de resultados
+del artículo: importancia SHAP, TVP por vivienda y estabilidad entre semillas.
+No calcula nada: lee los reportes y los JSON de los expedientes, así que cada
+valor se puede rastrear hasta su fuente. Sigue D40: API orientada a objetos y
+metadatos fijos. Se comprobó que dos corridas producen PNG idénticos byte a byte.
+
+**Los PNG se versionan en `articulo/figuras/`**, a diferencia de los artefactos,
+porque el artículo tiene que compilar sin los datos. Solo muestran agregados.
+
+**Dos diferencias con las figuras del expediente (D40).** Cada barra lleva su
+valor, porque en el artículo no hay una tabla que acompañe a la figura, y el
+fondo es blanco y a 300 DPI, porque van a imprenta.
+
+**El mapa de calor codifica la TVP, no la diferencia.** La revisión propuso
+colorear vivienda × actividad por la diferencia de TVP, pero esa diferencia es
+un único valor por actividad. Lo que varía por vivienda es la tasa: el color la
+codifica, las celdas con menos de 30 casos se marcan como fuera de la
+comparación, y la diferencia va en una columna aparte.
+
+**No tiene pruebas automáticas.** El script solo dibuja lo que ya está en los
+artefactos, que sí están probados; su resultado se revisa mirando las figuras.

@@ -36,16 +36,11 @@ exactitud en la configuración multi-hogar fue baja, entre 0,225 y 0,433 por
 vivienda, lo que amplía el margen para observar disparidades. Tercero, el
 procedimiento no midió la robustez del sistema ante entradas ruidosas o
 degradadas. Cuarto, cada expediente proviene de un único entrenamiento con
-semilla fija. Para estimar cuánto depende el resultado de esa semilla, el
-modelo se reentrenó con diez semillas, con un plan y una regla de lectura
-declarados antes de correrlo: una combinación incumple de forma estable si lo
-hace en al menos ocho de las diez. El veredicto de equidad no aprobó en
-ninguna de las veinte corridas. En Aruba, las cuatro combinaciones que superan
-el umbral lo hicieron con todas las semillas; en la serie multi-hogar, 28 de
-29. La excepción es la diferencia de 0,107 en la TVP de Watch\_TV entre
-viviendas (0,774 en hh101 frente a 0,667 en hh107), que superó el umbral en
-siete de las diez semillas (media 0,105; rango 0,081--0,119): depende del
-entrenamiento y no sostiene por sí sola una conclusión sobre el sistema.
+semilla fija. El análisis de estabilidad muestra que el veredicto no depende de
+esa semilla y que solo una combinación cercana al umbral, Watch\_TV entre
+viviendas, no sostiene por sí sola una conclusión sobre el sistema. Ese análisis
+mide el azar del entrenamiento, no el ruido muestral de los grupos con pocos
+casos: la estabilidad entre semillas no equivale a significancia estadística.
 % Análisis de estabilidad: D61 y `make estabilidad`; plan en estabilidad.yaml.
 
 La trazabilidad fue el componente transversal que permitió unir resultados

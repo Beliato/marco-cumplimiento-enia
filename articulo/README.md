@@ -43,6 +43,7 @@ tildes no se rompan aunque TeXworks tenga otra codificación por defecto.
 | `contenido/00-metadatos.tex` | Título, autores, resumen, palabras clave |
 | `contenido/01-…06-*.tex` | Una sección por archivo |
 | `contenido/figura-arquitectura.tex` | Figura 1, dibujada en TikZ |
+| `figuras/*.png` | Figuras 2 a 4, generadas con `make figuras` (D62) |
 | `contenido/macros.tex` | Marcas de revisión |
 | `referencias.bib` | Bibliografía verificada |
 
@@ -133,14 +134,31 @@ y la regla de lectura comprometidos en git antes de correrlo (D61). El cuarto
 límite de la Discusión pasa de declarar que no se midió a reportar el
 resultado, y las semillas salen del trabajo futuro de las Conclusiones.
 
+### Los comentarios del profesor
+
+La versión de Word que circula entre las personas autoras recibió comentarios del
+profesor guía, y este LaTeX se alineó con ella: resumen y abstract, palabras
+clave, un párrafo de contribuciones en la Introducción, tres figuras de
+resultados, el análisis de estabilidad separado en método, resultado e
+interpretación, nuevas líneas futuras, y la declaración de uso de IA. Se
+incorporó además al profesor como tercer autor.
+
+Sus propuestas se ajustaron donde no se sostenían contra los expedientes: el
+"28 de 29" del resumen es solo del piloto multi-hogar (en total son 32 de 33), y
+el mapa de calor codifica la TVP y no la diferencia (D62). Las contribuciones
+evitan afirmar que el protocolo "no se puede alterar" o que el instrumento es
+"transferible", que el estudio no demuestra.
+
+El Word no tiene la Figura 1 de arquitectura, así que allí las figuras de
+resultados son la 1, la 2 y la 3.
+
 ## Pendientes para decidir
 
 Ordenados por importancia.
 
-1. **Declaración de uso de IA.** Las personas autoras la quitaron por ahora.
-   Antes del envío, revisar si la política de la revista la exige: GitHub
-   Copilot armó el borrador inicial, y Claude hizo la conversión a LaTeX, la
-   verificación de referencias y la alineación con PIA02.
+1. **Declaración de uso de IA.** Ya está en el texto. Falta el modelo de GitHub
+   Copilot, confirmar si Laura usó otra herramienta y revisar la política de la
+   revista. Los modelos de Claude salen de los commits del repositorio.
 2. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
    *refinamientos* que el piloto introdujo respecto de PIA02 (métricas que
    deciden, descarte de Fairlearn, piloto multi-hogar, nombres de zona), que
@@ -155,8 +173,10 @@ Ordenados por importancia.
    octubre de 2024*, con ISBN 978-9968-732-94-9; PIA02 la cita como "Versión
    2.6", que el documento no menciona. El mismo PDF se declara "versión
    simplificada" (p. 3) y remite a la completa en www.micitt.go.cr.
-6. **Autores**: orden, correos, ORCID y si hay una tercera persona.
-7. **Palabras clave**: la plantilla pide términos del tesauro de la UNESCO.
+6. **Autores**: faltan los ORCID. Los correos y las cédulas no se versionan aquí
+   porque el repositorio es público; están en la versión de Word.
+7. **Palabras clave**: son las que propuso el profesor, pero la plantilla pide
+   términos del tesauro de la UNESCO. Confirmar si la revista lo exige.
 8. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
     consultar para verificar el título oficial en español.
 9. **Páginas de Lundberg y Lee (2017)**: 4765–4774 vienen del borrador y de

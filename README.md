@@ -125,6 +125,7 @@ make pipeline CONFIG=config.hogares.yaml   # el piloto multi-hogar
 make demo                 # los 6 pasos sobre 20 días, en menos de un minuto (ver docs/demo.md)
 make verificar-registro   # verifica la bitácora de inferencias
 make estabilidad          # reentrena con 10 semillas y mide qué disparidades son estables (D61)
+make figuras              # genera las figuras de resultados del artículo desde los expedientes (D62)
 make clean                # borra artefactos generados (no toca datos/)
 make help                 # lista todos los comandos
 ```
@@ -229,10 +230,10 @@ SHA-256 de la fila de entrada — no se guardan datos crudos), `salida_modelo`,
 ├── estabilidad.yaml         plan del análisis de estabilidad entre semillas
 ├── requirements.txt         dependencias directas, versiones exactas
 ├── requirements.lock        cierre transitivo (generado por `make lock`)
-├── Makefile                 setup · lock · test · pipeline · demo · estabilidad · verificar-registro · clean
+├── Makefile                 setup · lock · test · pipeline · demo · estabilidad · figuras · verificar-registro · clean
 ├── pyproject.toml           configuración de pytest (sin empaquetar)
 ├── .python-version          3.11
-├── scripts/                 setup.sh · preparar_demo.py · preparar_hogares.py
+├── scripts/                 setup.sh · preparar_demo.py · preparar_hogares.py · figuras_articulo.py
 ├── src/                     código de producción (ver Arquitectura)
 ├── tests/                   batería de pruebas (pytest)
 ├── datos/                   crudos/ e intermedios/  (ignorados por git)
