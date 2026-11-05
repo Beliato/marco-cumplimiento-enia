@@ -163,9 +163,9 @@ cotejar con los artículos completos, en especial capAI, que es el más cercano.
 
 Ordenados por importancia.
 
-1. **Declaración de uso de IA.** Ya está en el texto. Falta el modelo de GitHub
-   Copilot, confirmar si Laura usó otra herramienta y revisar la política de la
-   revista. Los modelos de Claude salen de los commits del repositorio.
+1. **Declaración de uso de IA.** Ya está en el texto. Falta confirmar si Laura usó
+   otra herramienta y revisar la política de la revista. Los modelos de Claude salen
+   de los commits del repositorio; de GitHub Copilot se nombra solo la herramienta.
 2. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
    *refinamientos* que el piloto introdujo respecto de PIA02 (métricas que
    deciden, descarte de Fairlearn, piloto multi-hogar, nombres de zona), que
