@@ -184,3 +184,16 @@ que existiera cobertura uno a uno entre inferencias esperadas y registradas, y
 que los nueve requerimientos contaran con artefactos presentes. El datasheet del
 conjunto de datos y el model card siguen las propuestas de Gebru et al.
 \cite{gebru2021datasheets} y Mitchell et al. \cite{mitchell2019modelcards}.
+
+\subsection{Análisis de estabilidad entre semillas}
+
+% Plan en estabilidad.yaml, comprometido en git antes de correrlo (D61).
+Para estimar cuánto dependen las disparidades del entrenamiento, el modelo de cada
+piloto se reentrenó con diez semillas. Solo varió la semilla del bosque aleatorio:
+los datos, la partición, los umbrales, los subgrupos y el soporte mínimo se
+mantuvieron, y las métricas se calcularon con la misma función del procedimiento.
+El plan y la regla de lectura se registraron en el repositorio antes de ejecutar el
+análisis: una combinación incumple de forma estable si supera el umbral en al menos
+el 80\,\% de las semillas, cumple de forma estable si lo supera en a lo sumo el
+20\,\%, y es inestable en otro caso. Este análisis no genera un expediente ni
+reemplaza el veredicto de la semilla sellada.

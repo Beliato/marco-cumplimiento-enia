@@ -20,65 +20,76 @@
   #3\\
   ORCID: #4\par\medskip}
 
+% Los correos, las cédulas y los ORCID no se versionan aquí: el repositorio es
+% público. Viven en la versión de Word, que es la que circula entre las personas
+% autoras.
 \newcommand{\bloqueAutores}{%
-  \autor{Miguel Ángel Méndez Arias}
-        {Universidad CENFOTEC. Costa Rica}
-        {\pendiente{correo}}
-        {\pendiente{ORCID}}
   \autor{Laura María Segura Miranda}
         {Universidad CENFOTEC. Costa Rica}
         {\pendiente{correo}}
         {\pendiente{ORCID}}
-  \pendiente{orden de las personas autoras y si hay una tercera (p. ej., quien dirigió la tesis)}\par}
+  \autor{Miguel Ángel Méndez Arias}
+        {Universidad CENFOTEC. Costa Rica}
+        {\pendiente{correo}}
+        {\pendiente{ORCID}}
+  \autor{David Gerardo Alfaro Viquez}
+        {Universidad CENFOTEC. Costa Rica}
+        {\pendiente{correo}}
+        {\pendiente{ORCID}}}
 
 \newcommand{\resumenES}{%
-La Estrategia Nacional de Inteligencia Artificial de Costa Rica establece
-principios de transparencia, equidad y responsabilidad, pero no especifica
-mecanismos técnicos para verificar su cumplimiento en sistemas concretos. Este
-artículo presenta y evalúa un marco operativo que traduce esos principios en
-una batería de pruebas computacionales y artefactos auditables, aplicada a
-sistemas de clasificación de actividades basados en sensores de infrarrojo
-pasivo y otros sensores ambientales para el monitoreo domiciliario de personas
-adultas mayores. La metodología consistió en traducir tres
-principios de la estrategia nacional en nueve requerimientos operativos,
-articularlos con el AI Act de la Unión Europea y el NIST AI Risk Management
-Framework, e implementarlos como un procedimiento reproducible de seis pasos. El
-marco integra explicabilidad local y global mediante SHAP, evaluación de equidad
-por subgrupos con umbrales declarados previamente, registro estructurado de
-inferencias y generación de artefactos auditables. La aplicación piloto sobre
-dos configuraciones del conjunto CASAS produjo expedientes completos: Aruba, con
-11\,175 inferencias, y una serie multi-hogar, con 7561 inferencias. En ambos
-casos se cubrieron los nueve requerimientos y se obtuvo un veredicto de no
-cumplimiento del sistema evaluado. Los resultados muestran que el marco permite
-transformar principios normativos en evidencia técnica verificable y
-reproducible.}
+La Estrategia Nacional de Inteligencia Artificial de Costa Rica (ENIA 2024-2027)
+establece principios de transparencia y explicabilidad, equidad y no
+discriminación, y responsabilidad, pero no especifica mecanismos técnicos para
+demostrar su cumplimiento. Este artículo presenta un marco operativo que traduce
+esos tres principios en nueve requerimientos verificables, pruebas computacionales
+y artefactos auditables. Siguiendo la ciencia del diseño, los requerimientos se
+derivaron de la ENIA, el Reglamento Europeo de IA y el NIST AI RMF, y se
+implementaron tres módulos: explicabilidad mediante SHAP; equidad mediante
+diferencias de tasas de verdaderos y falsos positivos entre subgrupos, con umbrales
+declarados antes de medir; y trazabilidad mediante una bitácora que registra cada
+inferencia y la vincula con su explicación. El marco se aplicó a un clasificador de
+actividades basado en sensores de infrarrojo pasivo (PIR), sobre dos conjuntos de
+datos distintos del proyecto CASAS: Aruba, con una vivienda, y una serie de nueve
+viviendas de personas adultas mayores. En ambos pilotos produjo un expediente de
+evidencia completo, con los nueve requerimientos cubiertos, y el sistema evaluado
+obtuvo un veredicto de no cumplimiento. Las disparidades aparecieron entre franjas
+horarias, tipos de día y, sobre todo, entre viviendas, con 14 de las 29
+combinaciones que superaron el umbral en el piloto multi-hogar. Con diez semillas,
+el veredicto se mantuvo y 32 de las 33 combinaciones sobre el umbral persistieron
+en todas. Los principios seleccionados pueden operacionalizarse mediante pruebas
+reproducibles, aunque la escasez de metadatos demográficos en los datos públicos
+limita la evaluación de equidad.}
 
 \newcommand{\palabrasclaveES}{%
-Inteligencia artificial; sensores; aprendizaje automático; explicabilidad;
-equidad; trazabilidad; auditoría
-\revisar{la plantilla pide términos del tesauro de la UNESCO}}
+Inteligencia artificial; gobernanza algorítmica; cumplimiento normativo de IA;
+equidad algorítmica; explicabilidad; sensores de infrarrojo pasivo; envejecimiento
+en el lugar (aging in place)
+\revisar{la plantilla pide términos del tesauro de la UNESCO; esta es la lista que propuso el profesor}}
 
 \newcommand{\resumenEN}{%
-Costa Rica's National Artificial Intelligence Strategy establishes principles
-of transparency, fairness, and accountability, but does not specify technical
-mechanisms to verify compliance with them in concrete systems. This article
-presents and evaluates an operational framework that translates these
-principles into a battery of computational tests and auditable artifacts,
-applied to activity classification systems based on passive infrared and other
-environmental sensors for home monitoring of older adults. The
-methodology translated three principles of the national strategy into nine
-operational requirements, aligned them with the European Union AI Act and the
-NIST AI Risk Management Framework, and implemented them as a reproducible
-six-step procedure. The framework integrates local and global explainability
-through SHAP, subgroup fairness evaluation with thresholds declared in advance,
-structured inference logging, and generation of auditable artifacts. The pilot
-application on two CASAS dataset configurations produced complete evidence
-files: Aruba, with 11,175 inferences, and a multi-home series, with 7,561
-inferences. In both cases, all nine requirements were covered and the evaluated
-system received a non-compliance verdict. The results show that the framework
-can transform normative principles into verifiable and reproducible technical
-evidence.}
+Costa Rica's National Artificial Intelligence Strategy (ENIA 2024-2027) establishes
+principles of transparency and explainability, fairness and non-discrimination, and
+accountability, but does not specify technical mechanisms to demonstrate compliance.
+This article presents an operational framework that translates these three
+principles into nine verifiable requirements, computational tests, and auditable
+artifacts. The research followed a design-science approach: the requirements were
+derived from the ENIA, the European AI Act, and the NIST AI Risk Management
+Framework, and three verification modules were implemented: explainability through
+SHAP; fairness through differences in true- and false-positive rates between
+subgroups, with thresholds declared before measurement; and traceability through a
+log that records each inference and links it to its explanation. The framework was
+applied to a daily-activity classifier based on passive infrared (PIR) sensors,
+using two distinct CASAS datasets: Aruba, with one home, and a series of nine homes
+of older adults. In both pilots it produced a complete evidence dossier, with all
+nine requirements covered, and the evaluated system received a non-compliance
+verdict. Disparities appeared across time-of-day bands, day types and, above all,
+homes, which account for 14 of the 29 combinations that exceeded the threshold in
+the multi-home pilot. With ten seeds, the verdict held and 32 of the 33 combinations
+above the threshold persisted in all of them. Results show that the selected
+principles can be operationalized through reproducible tests, although the scarcity
+of demographic metadata in public data limits the fairness evaluation.}
 
 \newcommand{\palabrasclaveEN}{%
-Artificial intelligence; sensors; machine learning; explainability; fairness;
-traceability; audit}
+Artificial intelligence; algorithmic governance; AI regulatory compliance;
+algorithmic fairness; explainability; passive infrared sensors; aging in place}

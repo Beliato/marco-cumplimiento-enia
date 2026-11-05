@@ -10,23 +10,32 @@ para sistemas de IA basados en sensores PIR. La implementación demostró que es
 requerimientos pueden evaluarse mediante un procedimiento reproducible de seis
 pasos, articulado con el AI Act de la Unión Europea y el NIST AI RMF.
 
-La aplicación sobre dos pilotos del conjunto CASAS generó expedientes
+La aplicación sobre dos conjuntos de datos de CASAS generó expedientes
 completos, con 18\,736 inferencias registradas en total y cobertura de los
 nueve requerimientos en ambos casos. Los dos sistemas evaluados obtuvieron
 veredicto de no cumplimiento, lo cual confirma la utilidad del marco para
 producir evidencia incluso cuando el resultado es desfavorable para el sistema
-auditado.
+auditado. Ese veredicto se mantuvo en las veinte corridas del análisis de
+estabilidad, y 32 de las 33 combinaciones que superan el umbral lo hicieron con las
+diez semillas.
 
 El estudio aporta una forma concreta de pasar de principios normativos a
 evidencia técnica. En particular, integra explicabilidad local y global,
 medición de equidad con umbrales declarados previamente, trazabilidad por
 inferencia y documentos auditables. Esta combinación permite que un tercero
 revise no solo los resultados, sino también el protocolo y los artefactos que
-los sostienen.
+los sostienen. Su aporte frente a la literatura revisada es reunir esos elementos
+en un solo procedimiento reproducible, orientado a la ENIA, capaz de sostener con
+evidencia verificable un veredicto desfavorable.
 
 Como trabajo futuro, se recomienda validar los umbrales de equidad con un panel
 multidisciplinario, incorporar pruebas de robustez ante entradas ruidosas o
 degradadas y extender la verificación a escenarios de monitoreo continuo. También se
 recomienda aplicar el marco a datasets con metadatos demográficos más
 completos, siempre que su uso sea éticamente justificable y compatible con la
-protección de datos personales.
+protección de datos personales. Además, conviene generalizar el módulo de
+explicabilidad más allá de los modelos de árbol, con métodos como KernelSHAP, para
+que el marco sirva a equipos que usan otras familias de modelos; validarlo con un
+sistema en producción y con la revisión de especialistas legales o de política
+pública externos al equipo; y medir el ruido muestral de las disparidades, por
+ejemplo con un control de subgrupos asignados al azar.

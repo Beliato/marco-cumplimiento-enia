@@ -61,13 +61,19 @@ técnicos, en concordancia con R3.3.
 
 % Fuente: artefactos/reporte_explicabilidad.md y
 % artefactos/hogares/reporte_explicabilidad.md (media de |SHAP|).
-En Aruba, las variables con mayor importancia global, medida como la media del
-valor absoluto de SHAP, fueron el movimiento en el sillón (0,0887), en la cocina
-(0,0780) y en el dormitorio (0,0447), seguidas de la duración de la ventana y la
-hora del día. En la configuración multi-hogar encabezaron la cocina (0,0452), el
-baño (0,0440) y el dormitorio (0,0406). En ambos casos, las variables
+La Figura~\ref{fig:shap} muestra las variables con mayor importancia global,
+medida como la media del valor absoluto de SHAP. En Aruba encabezan el movimiento
+en el sillón, la cocina y el dormitorio; en la configuración multi-hogar, la
+cocina, el baño y el dormitorio. En ambos casos, las variables
 dominantes son zonas del hogar, lo que permite contrastar el comportamiento del
 modelo con el conocimiento del dominio sobre dónde ocurre cada actividad.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/importancia_shap.png}
+  \caption{Importancia global de las ocho variables más influyentes en cada piloto, como media del valor absoluto de SHAP. Fuente: reportes de explicabilidad de los expedientes.}
+  \label{fig:shap}
+\end{figure}
 
 En el módulo de equidad, los resultados fueron desagregados por los subgrupos
 declarados en la configuración. La existencia de umbrales sellados antes de
@@ -127,8 +133,16 @@ En la configuración multi-hogar se evaluaron 108 de 150 combinaciones y 29
 superaron el umbral: 14 entre viviendas, 12 entre franjas horarias y 3 entre
 tipos de día. A diferencia de Aruba, aquí los subgrupos corresponden a personas
 distintas y no a condiciones de contexto, como plantea el requerimiento R4.1.
-Las mayores diferencias entre viviendas se dieron en la TVP de Work (0,872),
-Eat (0,810), Cook (0,503), Wash\_Dishes (0,447) y Sleep (0,425).
+De las 14 combinaciones entre viviendas, 10 son de TVP y 4 de tasa de falsos
+positivos. La Figura~\ref{fig:viviendas} muestra la TVP de cada vivienda: las
+mayores diferencias se dieron en Work (0,872), Eat (0,810) y Cook (0,503).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/tvp_por_vivienda.png}
+  \caption{TVP por vivienda y actividad en la configuración multi-hogar, para las actividades con al menos dos viviendas comparables, y diferencia entre la mayor y la menor. Fuente: reporte de equidad del expediente multi-hogar.}
+  \label{fig:viviendas}
+\end{figure}
 
 El caso de Cook muestra que la disparidad no se explica solo por la cantidad de
 datos. La vivienda hh107, la de más casos de esa actividad en la prueba (243),
@@ -143,6 +157,25 @@ desempeño en Sleep.
 % Fuente: tabla de viviendas del depósito de Zenodo (D60). D52 la usa como
 % hipótesis para el caso de Cook, no como conclusión.
 
+% Fuente: artefactos/estabilidad/*/estabilidad.json (D61).
+El análisis de estabilidad confirma estos hallazgos (Figura~\ref{fig:estabilidad}).
+Con la semilla original reprodujo exactamente las métricas de ambos expedientes, y
+el veredicto de equidad no aprobó en ninguna de las veinte corridas. En Aruba, las
+cuatro combinaciones que superan el umbral lo hicieron con las diez semillas; en la
+configuración multi-hogar, 28 de 29. La excepción es la TVP de Watch\_TV entre
+viviendas, con una diferencia de 0,107 con la semilla original (0,774 en hh101
+frente a 0,667 en hh107): superó el umbral en siete de las diez semillas, con media
+0,105 y rango de 0,081 a 0,119, por lo que se clasifica como inestable. Otras cuatro
+combinaciones que cumplen con la semilla original superaron el umbral en una o dos
+de las demás; según la regla declarada, su lectura es de cumplimiento estable.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figuras/estabilidad_semillas.png}
+  \caption{Estabilidad entre semillas de las 33 combinaciones que superan el umbral con la semilla sellada. Cada punto es una corrida, el rombo es la semilla sellada y la línea punteada es el umbral. Fuente: análisis de estabilidad sobre los expedientes de ambos pilotos.}
+  \label{fig:estabilidad}
+\end{figure}
+
 En el módulo de trazabilidad, la bitácora estructurada permitió verificar
 unicidad de identificadores, marcas temporales UTC, rango válido de confianza,
 versión de modelo, versión de esquema, responsable declarado y existencia de la
@@ -150,7 +183,7 @@ explicación referenciada. La verificación final agregó la cobertura entre
 conjunto de prueba y registros producidos, de modo que una bitácora válida pero
 incompleta no pudiera sostener el cumplimiento.
 
-Adicionalmente, el repositorio documentó 272 pruebas automatizadas en verde.
+Adicionalmente, el repositorio documentó 292 pruebas automatizadas en verde.
 Estas pruebas cubrieron configuración, preparación de datos, modelado,
 explicabilidad, equidad, trazabilidad, procedimiento y documentación. Aunque las
 pruebas no sustituyen una auditoría externa, aportan evidencia de
