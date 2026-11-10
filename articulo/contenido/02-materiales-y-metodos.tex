@@ -24,7 +24,10 @@ evaluado no fue la optimización predictiva del modelo, sino la capacidad del
 marco para generar evidencia verificable de cumplimiento. Por ello, el modelo de
 aprendizaje automático se trató como sujeto de prueba: se entrenó y selló antes
 de ejecutar el procedimiento de cumplimiento, y no se ajustó posteriormente con
-base en los resultados de equidad o explicabilidad.
+base en los resultados de equidad o explicabilidad. En consecuencia, el criterio
+de éxito del piloto fue que el marco generara en cada configuración un expediente
+completo y verificable, con evidencia para los nueve requerimientos, cualquiera
+fuera el veredicto sobre el sistema evaluado.
 
 % "El marco" y no "la metodología": los cuatro componentes son del artefacto
 % (PIA02, 5.1).
@@ -50,7 +53,10 @@ configuración corresponde al hogar Aruba \cite{cook2012aruba}, con una vivienda
 sensores PIR, sensores de puerta, sensores de temperatura y actividades
 anotadas. La segunda corresponde a una serie multi-hogar, compuesta por nueve
 viviendas de personas adultas mayores de una comunidad de retiro, publicada en
-el depósito oficial de CASAS \cite{cook2025zenodo}.
+el depósito oficial de CASAS \cite{cook2025zenodo}. Se incluyeron las viviendas
+hh101 a hh110 con al menos 30 días de registro, truncadas a sus primeros 30 días,
+según una regla de selección declarada antes de medir.
+% Regla de selección: scripts/preparar_hogares.py y README del repositorio.
 Según ese mismo depósito, Aruba tiene una sola residente, descrita como una
 persona adulta mayor que vive en la comunidad \cite{cook2025zenodo}. El
 proyecto no recolectó datos nuevos ni tuvo contacto con participantes humanos.
@@ -60,14 +66,17 @@ proyecto no recolectó datos nuevos ni tuvo contacto con participantes humanos.
 Los eventos se transformaron en ventanas disjuntas de 30 eventos consecutivos.
 Cada ventana generó una fila tabular con conteos por zona del hogar, eventos de
 puerta, variables temporales y, cuando estaban disponibles, lecturas de
-temperatura. La partición de entrenamiento y prueba fue temporal por día, con
-una proporción de prueba de 0,2. Esta decisión evitó mezclar ventanas contiguas
+temperatura; su etiqueta fue la actividad anotada en su último evento. La
+partición fue temporal por día: el último 20\,\% de los días de cada vivienda se
+reservó para prueba. Esta decisión evitó mezclar ventanas contiguas
 de una misma secuencia entre entrenamiento y prueba.
 
 \subsection{Modelo de referencia}
 
 El modelo de referencia fue un clasificador \texttt{RandomForestClassifier}
 \cite{breiman2001rf,pedregosa2011sklearn} con semilla fija, ejecución de un solo hilo y versiones de bibliotecas declaradas.
+Usó 300 árboles, una profundidad máxima de 12, al menos 5 casos por hoja y pesos
+de clase balanceados.
 Su función fue proporcionar inferencias para auditar el marco. La calidad
 predictiva del modelo no se usó como criterio de éxito del estudio, pues el
 propósito fue comprobar si el procedimiento producía evidencia completa y
@@ -118,14 +127,14 @@ entre principio, requerimiento y evidencia esperada.
     \midrule
     Transparencia y explicabilidad & R3.1 & Explicación local por inferencia mediante atribución cuantificada de variables. \\
     Transparencia y explicabilidad & R3.2 & Importancia global agregada sobre el conjunto de evaluación. \\
-    Transparencia y explicabilidad & R3.3 & Traducción de resultados a lenguaje comprensible y model card. \\
+    Transparencia y explicabilidad & R3.3 & Traducción de resultados a lenguaje comprensible y ficha del modelo. \\
     \midrule
     Equidad y no discriminación & R4.1 & Desempeño desagregado por subgrupo. \\
     Equidad y no discriminación & R4.2 & Métricas de disparidad con umbrales declarados antes de medir. \\
-    Equidad y no discriminación & R4.3 & Datasheet del conjunto de datos con procedencia, composición y limitaciones. \\
+    Equidad y no discriminación & R4.3 & Ficha del conjunto de datos con procedencia, composición y limitaciones. \\
     \midrule
     Responsabilidad & R5.1 & Bitácora estructurada y persistente de inferencias. \\
-    Responsabilidad & R5.2 & Model card con propósito, desempeño, limitaciones y condiciones de uso. \\
+    Responsabilidad & R5.2 & Ficha del modelo con propósito, desempeño, limitaciones y condiciones de uso. \\
     Responsabilidad & R5.3 & Verificación de reconstrucción y atribución ex post de decisiones. \\
     \bottomrule
   \end{tabularx}
@@ -134,7 +143,7 @@ entre principio, requerimiento y evidencia esperada.
 
 \subsection{Módulo de explicabilidad}
 
-El módulo de explicabilidad utilizó SHAP con TreeExplainer para calcular
+El módulo de explicabilidad utilizó SHAP (SHapley Additive exPlanations) con TreeExplainer para calcular
 atribuciones locales de las variables de entrada
 \cite{lundberg2017shap,lundberg2020treeshap}. Para cada inferencia del conjunto
 de prueba se registró la clase predicha, el valor base, las contribuciones de
@@ -143,8 +152,8 @@ global se obtuvo como la media de las contribuciones absolutas locales, evitando
 un segundo cálculo independiente y manteniendo coherencia entre explicaciones
 locales y globales. Las variables se nombraron por zonas del hogar, por ejemplo
 cocina o dormitorio, para favorecer la comprensión por parte de destinatarios no
-técnicos. La factibilidad de este tipo de explicaciones sobre eventos de
-sensores en hogares inteligentes está documentada en la literatura del dominio
+técnicos. La factibilidad de explicar el reconocimiento de actividades a partir
+de sensores en hogares inteligentes está documentada en la literatura del dominio
 \cite{arrotta2022dexar}.
 
 \subsection{Módulo de equidad}
@@ -156,15 +165,24 @@ En Aruba, los subgrupos fueron contextuales, como franja horaria y tipo de día.
 En la configuración multi-hogar, se incorporó el hogar como subgrupo
 poblacional, pues cada vivienda representa una persona o unidad doméstica
 distinta. Las métricas con efecto en el veredicto fueron diferencia de tasa de
-verdaderos positivos, que corresponde a la igualdad de oportunidades
+verdaderos positivos (TVP), que corresponde a la igualdad de oportunidades
 \cite{hardt2016equality}, y diferencia de tasa de falsos positivos, ambas con
-umbral de 0,10 declarado antes de la ejecución. También se reportaron como
+umbral de 0,10 declarado antes de la ejecución. Para cada actividad, cada tasa se
+calculó en cada categoría del subgrupo, y la diferencia es la que hay entre la tasa
+más alta y la más baja, considerando solo las categorías con al menos 30 casos en
+su denominador; si quedaban menos de dos, la combinación se declaró no evaluable.
+El umbral de 0,10 y el soporte mínimo de 30 casos son convenciones declaradas por
+el equipo antes de medir: ni la ENIA ni el AI Act fijan valores, y su calibración
+queda como trabajo futuro.
+% Diferencia máxima menos mínima: src/equidad/metricas_equidad.py. Umbrales: D8.
+También se reportaron como
 descriptivas la diferencia de paridad demográfica y el cociente de tasa de
 selección.
 
 \subsection{Módulo de trazabilidad}
 
-La trazabilidad se implementó mediante una bitácora JSONL \emph{append-only}.
+La trazabilidad se implementó mediante una bitácora JSONL a la que solo se agregan
+registros (\emph{append-only}).
 Cada línea registró identificador de evento, marca temporal UTC, hash de la
 entrada procesada, salida del modelo, confianza, versión del modelo, versión del
 marco, referencia a la explicación local, responsable declarado y versión del
@@ -181,8 +199,8 @@ auditables y verificación de auditabilidad. El paso de declaración de criterio
 selló el hash SHA-256 del archivo de configuración. En la verificación final, el
 marco comprobó que ese hash no hubiera cambiado, que la bitácora fuera válida,
 que existiera cobertura uno a uno entre inferencias esperadas y registradas, y
-que los nueve requerimientos contaran con artefactos presentes. El datasheet del
-conjunto de datos y el model card siguen las propuestas de Gebru et al.
+que los nueve requerimientos contaran con artefactos presentes. La ficha del
+conjunto de datos y la ficha del modelo siguen las propuestas de Gebru et al.
 \cite{gebru2021datasheets} y Mitchell et al. \cite{mitchell2019modelcards}.
 
 \subsection{Análisis de estabilidad entre semillas}
