@@ -24,20 +24,20 @@ expediente.
       >{\raggedleft\arraybackslash}p{0.15\linewidth}%
       >{\raggedright\arraybackslash}p{0.12\linewidth}@{}}
     \toprule
-    Piloto & Configuración & Viviendas & Inferencias registradas & Requerimientos cubiertos & Veredicto del sistema evaluado \\
+    Piloto & Subgrupos evaluados & Viviendas & Inferencias registradas & Requerimientos cubiertos & Veredicto del sistema evaluado \\
     \midrule
-    CASAS Aruba    & \texttt{config.yaml}         & 1 & 11\,175 & 9 de 9 & No cumple \\
-    CASAS serie hh & \texttt{config.hogares.yaml} & 9 & 7561    & 9 de 9 & No cumple \\
+    CASAS Aruba       & Franja horaria y tipo de día           & 1 & 11\,175 & 9 de 9 & No cumple \\
+    CASAS multi-hogar & Vivienda, franja horaria y tipo de día & 9 & 7561    & 9 de 9 & No cumple \\
     \bottomrule
   \end{tabularx}
   \fuente{elaboración propia con base en la ejecución documentada del repositorio.}
 \end{table}
 
 Los dos expedientes generaron la totalidad de los artefactos previstos: ficha de
-caracterización, datasheet, protocolo de evaluación, explicaciones locales,
-importancia global, resultados de desempeño desagregado, métricas de equidad,
-bitácora de inferencias, reporte de explicabilidad, reporte de equidad, model
-card, reporte de cumplimiento, bitácora de ejecución y manifiesto de hashes. En
+caracterización, ficha del conjunto de datos, protocolo de evaluación,
+explicaciones locales, importancia global, resultados de desempeño desagregado,
+métricas de equidad, bitácora de inferencias, reporte de explicabilidad, reporte
+de equidad, ficha del modelo, reporte de cumplimiento, bitácora de ejecución y manifiesto de hashes. En
 ambos pilotos, los nueve requerimientos de la matriz quedaron respaldados por
 evidencia presente y verificable.
 % El manifiesto sella 14 artefactos: los de esta lista menos el propio
@@ -158,7 +158,8 @@ desempeño en Sleep.
 % hipótesis para el caso de Cook, no como conclusión.
 
 % Fuente: artefactos/estabilidad/*/estabilidad.json (D61).
-El análisis de estabilidad confirma estos hallazgos (Figura~\ref{fig:estabilidad}).
+El análisis de estabilidad muestra que estos hallazgos se sostienen al cambiar la
+semilla, con una excepción (Figura~\ref{fig:estabilidad}).
 Con la semilla original reprodujo exactamente las métricas de ambos expedientes, y
 el veredicto de equidad no aprobó en ninguna de las veinte corridas. En Aruba, las
 cuatro combinaciones que superan el umbral lo hicieron con las diez semillas; en la
@@ -185,7 +186,12 @@ incompleta no pudiera sostener el cumplimiento.
 
 Adicionalmente, el repositorio documentó 292 pruebas automatizadas en verde.
 Estas pruebas cubrieron configuración, preparación de datos, modelado,
-explicabilidad, equidad, trazabilidad, procedimiento y documentación. Aunque las
+explicabilidad, equidad, trazabilidad, procedimiento y documentación. Entre ellas
+hay casos sintéticos en los que el módulo de equidad aprueba, como un modelo sin
+errores, y otros en los que no aprueba: el veredicto desfavorable no es el único
+resultado posible del módulo.
+% tests/test_equidad.py: test_un_modelo_perfecto_aprueba_aunque_la_paridad_difiera.
+Aunque las
 pruebas no sustituyen una auditoría externa, aportan evidencia de
 reproducibilidad del procedimiento y reducen el riesgo de divergencia entre el
 diseño normativo y la implementación computacional.

@@ -159,35 +159,67 @@ evaluación (Raji et al., Z-Inspection y capAI) para ubicar el aporte frente a l
 publicado: PIA01 no los cubre. Sus descripciones salen de los resúmenes; faltan
 cotejar con los artículos completos, en especial capAI, que es el más cercano.
 
+### La revisión de fuentes y la revisión crítica
+
+Se cotejaron las 26 referencias con Crossref y DataCite: todas existen, sus datos
+coinciden y ninguna tiene avisos de retractación ni de corrección. Cambiaron tres
+cosas por vigencia o por forma:
+
+- **AI Act.** El Reglamento (UE) 2026/1744, verificado en EUR-Lex, aplazó las
+  obligaciones de alto riesgo al 2 de diciembre de 2027 (anexo III) y al 2 de
+  agosto de 2028 (anexo I, donde están los dispositivos médicos). La Introducción
+  lo dice y la referencia lo anota.
+- **Mehrabi et al.** lleva la fecha del número, julio de 2022.
+- **Lundberg y Lee (2017)** queda sin páginas, como Hardt et al.; el registro de
+  Zenodo, sin número de versión, porque no lo declara.
+
+La revisión crítica agregó lo que un revisor iba a pedir: la disponibilidad del
+código y de los datos, el criterio de éxito en el método, la regla de selección de
+las viviendas, la etiqueta de cada ventana, la partición, los hiperparámetros, cómo
+se calcula la diferencia de tasas, que los umbrales son convenciones del equipo, que
+la batería incluye casos en los que la equidad aprueba y que los datos son de
+Estados Unidos. El Cuadro 2 muestra los subgrupos evaluados en lugar de los nombres
+de archivo, y la terminología pasó al español: ficha del modelo y ficha del
+conjunto de datos. Todo sale del repositorio (configuraciones, `src/comun/datos.py`,
+`src/equidad/metricas_equidad.py`, `tests/test_equidad.py` y la sección Datos del
+README).
+
 ## Pendientes para decidir
 
 Ordenados por importancia.
 
-1. **Declaración de uso de IA.** Ya está en el texto. Falta confirmar si Laura usó
+1. **Tres citas por cotejar con el texto publicado.** En el Word, Trabajo
+   relacionado atribuye a Batool et al. que el AI Act y el NIST son los marcos más
+   citados, con transparencia y rendición de cuentas como principios principales;
+   el preprint de arXiv no lo dice, y la versión publicada no se pudo leer. A Park
+   et al. se les atribuyen las aplicaciones más frecuentes del dominio, que su
+   resumen no menciona; sí dice que la equidad y el sesgo están poco explorados.
+   Que el campo no evalúa transparencia, equidad ni gobernanza
+   (Introducción, `park2025aging,habibovic2025aging`) no se pudo verificar en
+   Habibovic et al., porque IEEE bloqueó el texto completo.
+2. **Declaración de uso de IA.** Ya está en el texto. Falta confirmar si Laura usó
    otra herramienta y revisar la política de la revista. Los modelos de Claude salen
    de los commits del repositorio; de GitHub Copilot se nombra solo la herramienta.
-2. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
+3. **Dos puntos de la revisión que no entraron en los cuatro cambios:** los
    *refinamientos* que el piloto introdujo respecto de PIA02 (métricas que
    deciden, descarte de Fairlearn, piloto multi-hogar, nombres de zona), que
    el objetivo específico 3 pide documentar; y la *contribución dual
    ENIA–AI Act* para el sector healthtech, central en PIA02 y ausente en el
    artículo.
-3. **Título.** Es una propuesta; la traducción al inglés también, y la
+4. **Título.** Es una propuesta; la traducción al inglés también, y la
    plantilla pide evitar traductores automáticos.
-4. **Figura 1.** Es un redibujo. Si se prefiere la original, exportarla desde
+5. **Figura 1.** Es un redibujo. Si se prefiere la original, exportarla desde
    Word como PNG a 300 dpi y reemplazar `contenido/figura-arquitectura.tex`.
-5. **Versión de la ENIA.** La página de créditos dice *Versión 1.0, 24 de
+6. **Versión de la ENIA.** La página de créditos dice *Versión 1.0, 24 de
    octubre de 2024*, con ISBN 978-9968-732-94-9; PIA02 la cita como "Versión
    2.6", que el documento no menciona. El mismo PDF se declara "versión
    simplificada" (p. 3) y remite a la completa en www.micitt.go.cr.
-6. **Autores**: faltan los ORCID. Los correos y las cédulas no se versionan aquí
+7. **Autores**: faltan los ORCID. Los correos y las cédulas no se versionan aquí
    porque el repositorio es público; están en la versión de Word.
-7. **Palabras clave**: son las que propuso el profesor, pero la plantilla pide
+8. **Palabras clave**: son las que propuso el profesor, pero la plantilla pide
    términos del tesauro de la UNESCO. Confirmar si la revista lo exige.
-8. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
-    consultar para verificar el título oficial en español.
-9. **Páginas de Lundberg y Lee (2017)**: 4765–4774 vienen del borrador y de
-    PIA02; la página oficial de NeurIPS no las muestra.
+9. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
+   consultar para verificar el título oficial en español.
 
 ## Correcciones para PIA02
 
