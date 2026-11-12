@@ -180,7 +180,16 @@ se calcula la diferencia de tasas, que los umbrales son convenciones del equipo,
 la batería incluye casos en los que la equidad aprueba y que los datos son de
 Estados Unidos. El Cuadro 2 muestra los subgrupos evaluados en lugar de los nombres
 de archivo, y la terminología pasó al español: ficha del modelo y ficha del
-conjunto de datos. Todo sale del repositorio (configuraciones, `src/comun/datos.py`,
+conjunto de datos.
+
+Después se cotejó el texto con los PDF oficiales del AI Act en español y del NIST
+AI 100-1. Lo que el artículo dice de ambos coincide: las obligaciones de alto
+riesgo son las de los artículos 9 a 14, y los dispositivos médicos (productos
+sanitarios, anexo I) solo son de alto riesgo si además pasan una evaluación de
+conformidad por terceros (art. 6.1). Se adoptó el término oficial "conservación de
+registros" (art. 12), los umbrales declarados antes de medir se apoyan en el
+art. 9.8, que exige probar con parámetros y umbrales definidos previamente, y las
+funciones del NIST quedaron en su orden: gobernar, mapear, medir y gestionar. Todo sale del repositorio (configuraciones, `src/comun/datos.py`,
 `src/equidad/metricas_equidad.py`, `tests/test_equidad.py` y la sección Datos del
 README).
 
@@ -218,8 +227,11 @@ Ordenados por importancia.
    porque el repositorio es público; están en la versión de Word.
 8. **Palabras clave**: son las que propuso el profesor, pero la plantilla pide
    términos del tesauro de la UNESCO. Confirmar si la revista lo exige.
-9. **AI Act**: la referencia usa el título en inglés. EUR-Lex no se pudo
-   consultar para verificar el título oficial en español.
+9. **AI Act**: la referencia usa el título en inglés. El oficial en español, cotejado
+   con el PDF del DOUE, es "Reglamento (UE) 2024/1689 del Parlamento Europeo y del
+   Consejo, de 13 de junio de 2024, por el que se establecen normas armonizadas en
+   materia de inteligencia artificial […] (Reglamento de Inteligencia Artificial)".
+   Falta decidir si la referencia pasa al español.
 
 ## Correcciones para PIA02
 
